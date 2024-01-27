@@ -6,12 +6,8 @@
 
 # Based on Android 14 HyperOS
 
-# tosasitill made with love 0202 & 0227
-
-# 2023.12.26
-
-build_user="Bruce Teng, tosasitill"
-build_host="pangu-build-Ubuntu_tosasitill"
+build_user="Mr.wang"
+build_host="Ubuntu"
 
 # 底包和移植包为外部参数传入
 baserom="$1"
@@ -794,9 +790,7 @@ for i in $(find build/portrom/images -type f -name "build.prop");do
 done
 
 # 修复各种疑难杂症
-echo "# tosasitill here made with love" >> build/portrom/images/product/etc/build.prop
 echo "ro.miui.cust_erofs=0" >> build/portrom/images/product/etc/build.prop
-echo "# tosasitill here 0202 & 0227" >> build/portrom/images/system/system/build.prop
 echo "ro.crypto.state=encrypted" >> build/portrom/images/system/system/build.prop
 echo "debug.game.video.support=true" >> build/portrom/images/system/system/build.prop
 echo "debug.game.video.speed=true" >> build/portrom/images/system/system/build.prop
