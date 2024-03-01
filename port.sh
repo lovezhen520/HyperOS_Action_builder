@@ -454,12 +454,7 @@ fi
 green "添加动画多线程支持"
 echo "persist.sys.miui_animator_sched.sched_threads=2" >> build/portrom/images/product/etc/build.prop
 
-green "添加 Via 浏览器作为默认浏览器存在"
-mkdir build/portrom/images/product/app/Via
-cp -rf devices/via.apk build/portrom/images/product/app/Via/
-green "添加 Magisk 26.4"
-mkdir build/portrom/images/product/app/Magisk
-cp -rf devices/Magisk-v26.4.apk build/portrom/images/product/app/Magisk/
+
 baseDevicesAndroidOverlay=$(find build/baserom/images/product -type f -name "DevicesAndroidOverlay.apk")
 portDevicesAndroidOverlay=$(find build/portrom/images/product -type f -name "DevicesAndroidOverlay.apk")
 if [ -f "${baseDevicesAndroidOverlay}" ] && [ -f "${portDevicesAndroidOverlay}" ];then
@@ -663,13 +658,6 @@ for prop_file in $(find build/portrom/images/vendor/ -name "*.prop"); do
         break  
     fi
 done
-base_vndk=$(find build/baserom/images/system_ext/apex -type f -name "com.android.vndk.v${vndk_version}.apex")
-port_vndk=$(find build/portrom/images/system_ext/apex -type f -name "com.android.vndk.v${vndk_version}.apex")
-
-if [ ! -f "${port_vndk}" ]; then
-    yellow "apex不存在，从原包复制" "target apex is missing, copying from baserom"
-    cp -rf "${base_vndk}" "build/portrom/images/system_ext/apex/"
-fi
 
 green "正在替换徕卡相机APK"
 rm -rf build/portrom/images/product/priv-app/MiuiCamera
@@ -795,6 +783,14 @@ echo "ro.crypto.state=encrypted" >> build/portrom/images/system/system/build.pro
 echo "debug.game.video.support=true" >> build/portrom/images/system/system/build.prop
 echo "debug.game.video.speed=true" >> build/portrom/images/system/system/build.prop
 sed -i "s/persist\.sys\.millet\.cgroup1/#persist\.sys\.millet\.cgroup1/" build/portrom/images/vendor/build.prop
+
+green "添加 Via 浏览器作为默认浏览器存在"
+mkdir build/portrom/images/product/data-app/Via
+cp -rf devices/via.apk build/portrom/images/product/data-app/Via/
+green "添加 Magisk 26.4 APP"
+mkdir build/portrom/images/product/data-app/Magisk
+cp -rf devices/Magisk-v26.4.apk build/portrom/images/product/data-app/Magisk/
+
 
 # Millet fix
 blue "修复Millet" "Fix Millet"
